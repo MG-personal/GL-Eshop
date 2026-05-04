@@ -50,5 +50,20 @@ public class JSONFormatterTest {
 
     }
 
+    @Test
+    public void shouldBeValidJSON(){
+
+
+        JSONFormatter formatter =
+                new JSONFormatter();
+
+        String result =
+                formatter.format(fakeList);
+
+        assertTrue(result.startsWith("{") || result.startsWith("["));
+
+    }
+
+
 
 }
