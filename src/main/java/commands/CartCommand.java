@@ -1,4 +1,4 @@
-package main.commands;
+package commands;
 
 public class CartCommand {
 }

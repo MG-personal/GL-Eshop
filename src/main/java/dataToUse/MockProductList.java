@@ -1,4 +1,4 @@
-package main.dataToUse;
+package dataToUse;
 
 
 public class MockProductList implements ProductListInt{

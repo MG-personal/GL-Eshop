@@ -1,4 +1,4 @@
-package main.formatters;
+package formatters;
 
 public interface Formatter {
 

@@ -1,4 +1,4 @@
-package main.formatters;
+package formatters;
 
 public class JSONFormatter  implements Formatter {
 }
