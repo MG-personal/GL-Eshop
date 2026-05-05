@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class JsonFormatterTest {
+public class JSONFormatterTest {
     private Product fakeProduct;
     private List<Product> fakeList;
 
