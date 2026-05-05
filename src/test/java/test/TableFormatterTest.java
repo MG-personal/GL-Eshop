@@ -1,8 +1,8 @@
-package tests;
+package test;
 
-import main.dataToUse.Product;
-import main.formatters.JSONFormatter;
-import main.formatters.TableFormatter;
+import dataToUse.Product;
+import formatters.JSONFormatter;
+import formatters.TableFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +20,15 @@ public class TableFormatterTest {
         fakeProduct = new Product("MyTestProduct", 80);
         fakeList = new ArrayList<>();
         fakeList.add(this.fakeProduct);
+    }
+
+    @Test
+    public void shouldContainTableLikeStructure(){
+
+        TableFormatter formatter = new TableFormatter();
+        String result = formatter.format(fakeList);
+
+        assertTrue(result.contains("|") || result.contains("-"));
     }
 
 

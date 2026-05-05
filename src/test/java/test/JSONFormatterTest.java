@@ -1,7 +1,7 @@
-package tests;
+package test;
 
-import main.dataToUse.Product;
-import main.formatters.JSONFormatter;
+import dataToUse.Product;
+import formatters.JSONFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class JSONFormatterTest {
+public class JsonFormatterTest {
     private Product fakeProduct;
     private List<Product> fakeList;
 
@@ -24,7 +24,6 @@ public class JSONFormatterTest {
 
     @Test
     public void shouldContainProductName(){
-
 
         JSONFormatter formatter =
                 new JSONFormatter();
@@ -51,17 +50,22 @@ public class JSONFormatterTest {
     }
 
     @Test
-    public void shouldBeValidJSON(){
+    public void shouldFormatAsJsonWhenRequested(){
 
-
-        JSONFormatter formatter =
-                new JSONFormatter();
-
-        String result =
-                formatter.format(fakeList);
+        JSONFormatter formatter = new JSONFormatter();
+        String result = formatter.format(fakeList);
 
         assertTrue(result.startsWith("{") || result.startsWith("["));
+    }
 
+    @Test
+    public void shouldContainJsonStructure(){
+
+        JSONFormatter formatter = new JSONFormatter();
+        String result = formatter.format(fakeList);
+
+        assertTrue(result.contains("name"));
+        assertTrue(result.contains("price"));
     }
 
 
