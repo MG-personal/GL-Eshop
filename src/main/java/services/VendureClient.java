@@ -2,10 +2,16 @@ package services;
 
 import dataToUse.Product;
 import dataToUse.MockProductList;
+
 import graphql.GraphQLQuery;
 import graphql.ProductsQuery;
 
 import java.util.List;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class VendureClient {
 
@@ -21,15 +27,42 @@ public class VendureClient {
   }
 
   public <T> T execute(GraphQLQuery<T> query) {
-    System.out.println("Connecting to: " + url);
 
-    // envoyer HTTP POST
-    // récupérer JSON
-    // return query.parseResponse(json);
+    try {
 
-    String queryString = query.buildQuery();
-    System.out.println("Printing query: " + queryString);
-    String fakeJson = "{fake json}";
-    return query.parseResponse(fakeJson);
+      String queryString = query.buildQuery();
+
+      String payload =
+              "{\"query\":\""
+                      + queryString.replace("\"", "\\\"")
+                      .replace("\n", " ")
+                      + "\"}";
+
+      HttpClient client = HttpClient.newHttpClient();
+
+      HttpRequest request =
+              HttpRequest.newBuilder()
+                      .uri(URI.create(url))
+                      .header("Content-Type", "application/json")
+                      .POST(HttpRequest.BodyPublishers.ofString(payload))
+                      .build();
+
+      HttpResponse<String> response =
+              client.send(request,
+                      HttpResponse.BodyHandlers.ofString());
+
+      String json = response.body();
+
+      System.out.println(json);
+
+      return query.parseResponse(json);
+
+    } catch (Exception e) {
+      throw new RuntimeException(
+              "Could not connect to Vendure at " + url +
+                      ". Make sure the Vendure server is running.",
+              e
+      );
+    }
   }
 }
