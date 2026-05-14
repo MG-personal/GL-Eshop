@@ -17,7 +17,7 @@ public class JSONFormatter implements Formatter {
       sb.append("}");
 
       if (i < products.size() - 1) {
-        sb.append(",");
+        sb.append(",\n");
       }
     }
 
