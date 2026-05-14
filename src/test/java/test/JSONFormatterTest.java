@@ -11,63 +11,52 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class JSONFormatterTest {
-    private Product fakeProduct;
-    private List<Product> fakeList;
+  private Product fakeProduct;
+  private List<Product> fakeList;
 
-    @Before
-    public void createFakeList(){
-        fakeProduct = new Product("MyTestProduct", 80);
-        fakeList = new ArrayList<>();
-        fakeList.add(this.fakeProduct);
-    }
+  @Before
+  public void createFakeList() {
+    fakeProduct = new Product("MyTestProduct", 80);
+    fakeList = new ArrayList<>();
+    fakeList.add(this.fakeProduct);
+  }
 
+  @Test
+  public void shouldContainProductName() {
 
-    @Test
-    public void shouldContainProductName(){
+    JSONFormatter formatter = new JSONFormatter();
 
-        JSONFormatter formatter =
-                new JSONFormatter();
+    String result = formatter.format(fakeList);
 
-        String result =
-                formatter.format(fakeList);
+    assertTrue(result.contains("MyTestProduct"));
+  }
 
-        assertTrue(result.contains("MyTestProduct"));
+  @Test
+  public void shouldContainProductPrice() {
 
-    }
+    JSONFormatter formatter = new JSONFormatter();
 
-    @Test
-    public void shouldContainProductPrice(){
+    String result = formatter.format(fakeList);
 
+    assertTrue(result.contains("80"));
+  }
 
-        JSONFormatter formatter =
-                new JSONFormatter();
+  @Test
+  public void shouldFormatAsJsonWhenRequested() {
 
-        String result =
-                formatter.format(fakeList);
+    JSONFormatter formatter = new JSONFormatter();
+    String result = formatter.format(fakeList);
 
-        assertTrue(result.contains("80"));
+    assertTrue(result.startsWith("{") || result.startsWith("["));
+  }
 
-    }
+  @Test
+  public void shouldContainJsonStructure() {
 
-    @Test
-    public void shouldFormatAsJsonWhenRequested(){
+    JSONFormatter formatter = new JSONFormatter();
+    String result = formatter.format(fakeList);
 
-        JSONFormatter formatter = new JSONFormatter();
-        String result = formatter.format(fakeList);
-
-        assertTrue(result.startsWith("{") || result.startsWith("["));
-    }
-
-    @Test
-    public void shouldContainJsonStructure(){
-
-        JSONFormatter formatter = new JSONFormatter();
-        String result = formatter.format(fakeList);
-
-        assertTrue(result.contains("name"));
-        assertTrue(result.contains("price"));
-    }
-
-
-
+    assertTrue(result.contains("name"));
+    assertTrue(result.contains("price"));
+  }
 }
