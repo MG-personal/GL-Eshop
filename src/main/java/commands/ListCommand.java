@@ -2,10 +2,14 @@ package commands;
 
 import dataToUse.Product;
 import dataToUse.MockProductList;
+
 import formatters.*;
 
+import picocli.CommandLine.ParentCommand;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+
+import services.VendureClient;
 
 import java.util.List;
 
@@ -16,9 +20,14 @@ public class ListCommand implements Runnable {
             description = "Output format: table or json")
     private String format;
 
+    @ParentCommand
+    private MainCommand parent;
+
     @Override
     public void run() {
-        List<Product> products = MockProductList.getProducts();
+        //List<Product> products = MockProductList.getProducts();
+        VendureClient client = new VendureClient(parent.getUrl());
+        List<Product> products = client.getProducts();
 
         Formatter formatter;
 
