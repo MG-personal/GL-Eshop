@@ -7,17 +7,17 @@ import java.util.List;
 
 public class VendureClient {
 
-    private final String url;
+  private final String url;
 
-    public VendureClient(String url) {
-        this.url = url;
-    }
+  public VendureClient(String url) {
+    this.url = url;
+  }
 
-    public List<Product> getProducts() {
+  public List<Product> getProducts() {
 
-        System.out.println("Connecting to: " + url);
+    System.out.println("Connecting to: " + url);
 
-        // temporaire
-        return MockProductList.getProducts();
-    }
+    // temporaire
+    return MockProductList.getProducts();
+  }
 }
