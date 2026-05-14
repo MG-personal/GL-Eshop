@@ -2,6 +2,8 @@ package services;
 
 import dataToUse.Product;
 import dataToUse.MockProductList;
+import graphql.GraphQLQuery;
+import graphql.ProductsQuery;
 
 import java.util.List;
 
@@ -14,10 +16,20 @@ public class VendureClient {
   }
 
   public List<Product> getProducts() {
+    // return MockProductList.getProducts();    // temporaire
+    return execute(new ProductsQuery());
+  }
 
+  public <T> T execute(GraphQLQuery<T> query) {
     System.out.println("Connecting to: " + url);
 
-    // temporaire
-    return MockProductList.getProducts();
+    // envoyer HTTP POST
+    // récupérer JSON
+    // return query.parseResponse(json);
+
+    String queryString = query.buildQuery();
+    System.out.println("Printing query: " + queryString);
+    String fakeJson = "{fake json}";
+    return query.parseResponse(fakeJson);
   }
 }
