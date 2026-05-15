@@ -10,24 +10,25 @@ import static org.junit.Assert.*;
 
 public class ProductsQueryTest {
 
-    @Test
-    public void shouldBuildProductsQuery() {
+  @Test
+  public void shouldBuildProductsQuery() {
 
-        ProductsQuery query = new ProductsQuery();
+    ProductsQuery query = new ProductsQuery();
 
-        String result = query.buildQuery();
+    String result = query.buildQuery();
 
-        assertTrue(result.contains("products"));
-        assertTrue(result.contains("items"));
-        assertTrue(result.contains("name"));
-        assertTrue(result.contains("variants"));
-        assertTrue(result.contains("price"));
-    }
+    assertTrue(result.contains("products"));
+    assertTrue(result.contains("items"));
+    assertTrue(result.contains("name"));
+    assertTrue(result.contains("variants"));
+    assertTrue(result.contains("price"));
+  }
 
-    @Test
-    public void shouldParseProductsResponse() {
+  @Test
+  public void shouldParseProductsResponse() {
 
-        String json = """
+    String json =
+        """
                 {
                   "data": {
                     "products": {
@@ -47,16 +48,13 @@ public class ProductsQueryTest {
                 }
                 """;
 
-        ProductsQuery query = new ProductsQuery();
+    ProductsQuery query = new ProductsQuery();
 
-        List<Product> products =
-                query.parseResponse(json);
+    List<Product> products = query.parseResponse(json);
 
-        assertEquals(1, products.size());
-        assertEquals("Laptop",
-                products.get(0).getName());
+    assertEquals(1, products.size());
+    assertEquals("Laptop", products.get(0).getName());
 
-        assertEquals(129900,
-                products.get(0).getPrice());
-    }
+    assertEquals(129900, products.get(0).getPrice());
+  }
 }

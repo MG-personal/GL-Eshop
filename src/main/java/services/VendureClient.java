@@ -22,7 +22,6 @@ public class VendureClient {
   }
 
   public List<Product> getProducts() {
-    // return MockProductList.getProducts();    // temporaire
     return execute(new ProductsQuery());
   }
 
@@ -37,36 +36,29 @@ public class VendureClient {
       String queryString = query.buildQuery();
 
       String payload =
-              "{\"query\":\""
-                      + queryString.replace("\"", "\\\"")
-                      .replace("\n", " ")
-                      + "\"}";
+          "{\"query\":\"" + queryString.replace("\"", "\\\"").replace("\n", " ") + "\"}";
 
       HttpClient client = HttpClient.newHttpClient();
 
       HttpRequest request =
-              HttpRequest.newBuilder()
-                      .uri(URI.create(url))
-                      .header("Content-Type", "application/json")
-                      .POST(HttpRequest.BodyPublishers.ofString(payload))
-                      .build();
+          HttpRequest.newBuilder()
+              .uri(URI.create(url))
+              .header("Content-Type", "application/json")
+              .POST(HttpRequest.BodyPublishers.ofString(payload))
+              .build();
 
-      HttpResponse<String> response =
-              client.send(request,
-                      HttpResponse.BodyHandlers.ofString());
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
       String json = response.body();
 
-      System.out.println(json);
+      //System.out.println(json);
 
       return query.parseResponse(json);
 
     } catch (Exception e) {
       throw new RuntimeException(
-              "Could not connect to Vendure at " + url +
-                      ". Make sure the Vendure server is running.",
-              e
-      );
+          "Could not connect to Vendure at " + url + ". Make sure the Vendure server is running.",
+          e);
     }
   }
 }

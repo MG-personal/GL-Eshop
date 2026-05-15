@@ -17,7 +17,7 @@ public class TableFormatterTest {
 
     @Before
     public void createFakeList(){
-        fakeProduct = new Product("MyTestProduct", 80);
+        fakeProduct = new Product("MyTestProduct", 80, "blebleble");
         fakeList = new ArrayList<>();
         fakeList.add(this.fakeProduct);
     }

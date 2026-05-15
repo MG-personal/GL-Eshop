@@ -12,7 +12,7 @@ public class ProductTest {
 
   @Before
   public void createProduct() {
-    testProduct = new Product("testedProduct", 90);
+    testProduct = new Product("testedProduct", 90, "blublublu");
   }
 
   @Test

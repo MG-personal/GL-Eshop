@@ -16,7 +16,7 @@ public class JSONFormatterTest {
 
   @Before
   public void createFakeList() {
-    fakeProduct = new Product("MyTestProduct", 80);
+    fakeProduct = new Product("MyTestProduct", 80, "blobloblo");
     fakeList = new ArrayList<>();
     fakeList.add(this.fakeProduct);
   }

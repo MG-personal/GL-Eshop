@@ -8,24 +8,24 @@ import static org.junit.Assert.*;
 
 public class ProductQueryTest {
 
-    @Test
-    public void shouldBuildProductQuery() {
+  @Test
+  public void shouldBuildProductQuery() {
 
-        ProductQuery query =
-                new ProductQuery("2");
+    ProductQuery query = new ProductQuery("2");
 
-        String result = query.buildQuery();
+    String result = query.buildQuery();
 
-        assertTrue(result.contains("product"));
-        assertTrue(result.contains("id: \"2\""));
-        assertTrue(result.contains("name"));
-        assertTrue(result.contains("price"));
-    }
+    assertTrue(result.contains("product"));
+    assertTrue(result.contains("id: \"2\""));
+    assertTrue(result.contains("name"));
+    assertTrue(result.contains("price"));
+  }
 
-    @Test
-    public void shouldParseProductResponse() {
+  @Test
+  public void shouldParseProductResponse() {
 
-        String json = """
+    String json =
+        """
                 {
                   "data": {
                     "product": {
@@ -41,16 +41,12 @@ public class ProductQueryTest {
                 }
                 """;
 
-        ProductQuery query =
-                new ProductQuery("2");
+    ProductQuery query = new ProductQuery("2");
 
-        Product product =
-                query.parseResponse(json);
+    Product product = query.parseResponse(json);
 
-        assertEquals("Tablet",
-                product.getName());
+    assertEquals("Tablet", product.getName());
 
-        assertEquals(32900,
-                product.getPrice());
-    }
+    assertEquals(32900, product.getPrice());
+  }
 }

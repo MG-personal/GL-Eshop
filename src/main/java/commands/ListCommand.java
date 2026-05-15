@@ -1,7 +1,6 @@
 package commands;
 
 import dataToUse.Product;
-import dataToUse.MockProductList;
 
 import formatters.*;
 
@@ -23,7 +22,6 @@ public class ListCommand implements Runnable {
 
   @Override
   public void run() {
-    // List<Product> products = MockProductList.getProducts();
     VendureClient client = new VendureClient(parent.getUrl());
     List<Product> products = client.getProducts();
 
