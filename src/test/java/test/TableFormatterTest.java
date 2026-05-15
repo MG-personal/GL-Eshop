@@ -12,53 +12,42 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class TableFormatterTest {
-    private Product fakeProduct;
-    private List<Product> fakeList;
+  private Product fakeProduct;
+  private List<Product> fakeList;
 
-    @Before
-    public void createFakeList(){
-        fakeProduct = new Product("MyTestProduct", 80, "blebleble");
-        fakeList = new ArrayList<>();
-        fakeList.add(this.fakeProduct);
-    }
+  @Before
+  public void createFakeList() {
+    fakeProduct = new Product("MyTestProduct", 80, "blebleble");
+    fakeList = new ArrayList<>();
+    fakeList.add(this.fakeProduct);
+  }
 
-    @Test
-    public void shouldContainTableLikeStructure(){
+  @Test
+  public void shouldContainTableLikeStructure() {
 
-        TableFormatter formatter = new TableFormatter();
-        String result = formatter.format(fakeList);
+    TableFormatter formatter = new TableFormatter();
+    String result = formatter.format(fakeList);
 
-        assertTrue(result.contains("|") || result.contains("-"));
-    }
+    assertTrue(result.contains("|") || result.contains("-"));
+  }
 
+  @Test
+  public void shouldContainProductName() {
 
-    @Test
-    public void shouldContainProductName(){
+    TableFormatter formatter = new TableFormatter();
 
+    String result = formatter.format(fakeList);
 
-        TableFormatter formatter =
-                new TableFormatter();
+    assertTrue(result.contains("MyTestProduct"));
+  }
 
-        String result =
-                formatter.format(fakeList);
+  @Test
+  public void shouldContainProductPrice() {
 
-        assertTrue(result.contains("MyTestProduct"));
+    TableFormatter formatter = new TableFormatter();
 
-    }
+    String result = formatter.format(fakeList);
 
-    @Test
-    public void shouldContainProductPrice(){
-
-
-        TableFormatter formatter =
-                new TableFormatter();
-
-        String result =
-                formatter.format(fakeList);
-
-        assertTrue(result.contains("80"));
-
-    }
-
-
+    assertTrue(result.contains("80"));
+  }
 }
