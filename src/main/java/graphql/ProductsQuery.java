@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.ArrayList;
+
 
 public class ProductsQuery implements GraphQLQuery<List<Product>> {
   @Override
@@ -18,6 +18,7 @@ public class ProductsQuery implements GraphQLQuery<List<Product>> {
                     items {
                       id
                       name
+                      description
                       variants {
                         price
                       }
@@ -43,12 +44,15 @@ public class ProductsQuery implements GraphQLQuery<List<Product>> {
         String name = item.path("name").asText();
 
         int price = 0;
+
+        String description = item.path("description").asText();
+
         JsonNode variants = item.path("variants");
         if (variants.isArray() && variants.size() > 0) {
           price = variants.get(0).path("price").asInt();
         }
 
-        products.add(new Product(name, price));
+        products.add(new Product(name, price,description));
       }
 
       return products;

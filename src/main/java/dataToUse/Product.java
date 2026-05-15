@@ -1,12 +1,15 @@
 package dataToUse;
 
 public class Product {
+
   private final String name;
   private final int price;
+  private final String description;
 
-  public Product(String name, int price) {
+  public Product(String name, int price, String description) {
     this.name = name;
     this.price = price;
+    this.description = description;
   }
 
   public String getName() {
@@ -15,5 +18,9 @@ public class Product {
 
   public int getPrice() {
     return price;
+  }
+
+  public String getDescription() {
+    return description;
   }
 }

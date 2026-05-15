@@ -1,9 +1,9 @@
 package services;
 
 import dataToUse.Product;
-import dataToUse.MockProductList;
 
 import graphql.GraphQLQuery;
+import graphql.ProductQuery;
 import graphql.ProductsQuery;
 
 import java.util.List;
@@ -24,6 +24,10 @@ public class VendureClient {
   public List<Product> getProducts() {
     // return MockProductList.getProducts();    // temporaire
     return execute(new ProductsQuery());
+  }
+
+  public Product getProductById(String id) {
+    return execute(new ProductQuery(id));
   }
 
   public <T> T execute(GraphQLQuery<T> query) {

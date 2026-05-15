@@ -7,8 +7,8 @@ public class MockProductList {
 
   public static List<Product> getProducts() {
     List<Product> products = new ArrayList<>();
-    products.add(new Product("Computer", 790));
-    products.add(new Product("Keyboard", 120));
+    products.add(new Product("Computer", 790, "blablabla"));
+    products.add(new Product("Keyboard", 120, "bliblibloo"));
     return products;
   }
 }
